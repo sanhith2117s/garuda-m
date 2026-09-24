@@ -51,7 +51,8 @@ export default function ContextCursor() {
     };
 
     const move = (event: PointerEvent) => {
-      target.current = { x: event.clientX, y: event.clientY };
+      target.current.x = event.clientX;
+      target.current.y = event.clientY;
     };
 
     window.addEventListener('pointermove', move, { passive: true });
