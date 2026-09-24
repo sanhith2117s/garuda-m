@@ -66,7 +66,7 @@ function HeroScene() {
       <pointLight position={[-4, -2, 2]} intensity={10} color="#6aa99b" />
       <Suspense fallback={null}>
         <Float speed={1.4} rotationIntensity={0.2} floatIntensity={0.48}>
-          <CampusBuilding />
+          <CampusBuilding key="campus-building" />
         </Float>
         <DreiSparkles count={85} scale={7} size={1.8} speed={0.28} color="#f28c28" />
         <Environment preset="studio" />
