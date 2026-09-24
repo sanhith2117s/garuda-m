@@ -793,6 +793,24 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .reveal-visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; filter: none; transition: none; } *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; } }
 
+/* Sitewide Garuda / KMIT visual language */
+body { background: #f5f2eb; color: #17365d; }
+body, button, input, select, textarea { letter-spacing: -0.01em; }
+header nav, aside nav { font-size: 0.72rem; letter-spacing: 0.12em; }
+header nav a, aside nav a { transition: color 180ms ease, background-color 180ms ease, transform 180ms ease; }
+header nav a:hover, aside nav a:hover { color: #f28c28 !important; }
+.dark body, .dark #root { background: var(--garuda-ink); color: var(--garuda-text); }
+.dark [class*="bg-slate-50"], .dark [class*="bg-gray-50"], .dark [class*="bg-gray-100"] { background-color: var(--garuda-ink) !important; }
+.dark [class*="bg-indigo-50"], .dark [class*="bg-emerald-50"], .dark [class*="bg-orange-50"] { background-color: rgba(242, 140, 40, .10) !important; }
+.dark [class*="border-slate-200"], .dark [class*="border-gray-200"], .dark [class*="border-indigo-100"] { border-color: var(--garuda-line) !important; }
+.dark [class*="text-slate-700"], .dark [class*="text-slate-800"], .dark [class*="text-gray-700"], .dark [class*="text-gray-800"] { color: #dce4e8 !important; }
+.dark [class*="text-indigo-600"], .dark [class*="text-indigo-700"], .dark [class*="text-emerald-600"] { color: var(--garuda-teal) !important; }
+.dark [class*="bg-indigo-500"], .dark [class*="bg-indigo-700"], .dark [class*="bg-emerald-500"], .dark [class*="bg-emerald-700"] { background-color: #f28c28 !important; color: #17120b !important; }
+.dark [class*="hover\\:bg-indigo"]:hover, .dark [class*="hover\\:bg-emerald"]:hover { background-color: #d97518 !important; color: #17120b !important; }
+.dark table thead, .dark [role="columnheader"] { color: #f5f0e7 !important; background-color: var(--garuda-elevated) !important; }
+.dark td, .dark th { border-color: var(--garuda-line) !important; }
+.dark ::placeholder { color: #74828d !important; }
+
 .text-indigo-750,
 .dark .text-indigo-750 {
   color: #a5b4fc !important;
