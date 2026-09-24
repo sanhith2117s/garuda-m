@@ -802,8 +802,8 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .dark .context-cursor-trail { filter: drop-shadow(0 0 6px rgba(65,211,190,.4)); }
 @media (hover: none), (prefers-reduced-motion: reduce) { .context-cursor-trail { display: none; } }
 /* Keep the pencil trail; replace the former morphing head with a quiet arrow tip. */
-.context-cursor { width: 12px; height: 12px; margin: 0; transition: opacity 180ms ease; }
-.context-cursor::before { inset: 0; border-radius: 1px; clip-path: polygon(0 0, 100% 50%, 0 100%, 24% 50%); background: #6c5ce7; box-shadow: 0 0 10px rgba(108,92,231,.7), 0 0 24px rgba(65,211,190,.34); transform: none !important; }
+.context-cursor { width: 14px; height: 14px; margin: 0; transition: opacity 180ms ease, transform 90ms linear; }
+.context-cursor::before { inset: 0; border-radius: 1px; clip-path: polygon(0 0, 100% 50%, 0 100%, 24% 50%); background: #6c5ce7; box-shadow: 0 0 8px rgba(108,92,231,.85), 0 0 20px rgba(65,211,190,.4); transform: rotate(-4deg) !important; }
 .context-cursor::after, .context-cursor span { display: none; }
 .dark .context-cursor::before { background: #41d3be; box-shadow: 0 0 10px rgba(65,211,190,.8), 0 0 26px rgba(139,124,255,.42); }
 

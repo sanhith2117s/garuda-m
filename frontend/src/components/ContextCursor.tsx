@@ -34,17 +34,21 @@ export default function ContextCursor() {
       context.clearRect(0, 0, window.innerWidth, window.innerHeight);
       context.lineCap = 'round';
       context.lineJoin = 'round';
-      context.beginPath();
-      trail.current.forEach((point, index) => {
-        if (index === 0) context.moveTo(point.x, point.y);
-        else context.lineTo(point.x, point.y);
-      });
       const dark = document.documentElement.classList.contains('dark');
-      context.strokeStyle = dark ? 'rgba(65, 211, 190, .72)' : 'rgba(108, 92, 231, .58)';
-      context.shadowColor = dark ? 'rgba(65, 211, 190, .75)' : 'rgba(108, 92, 231, .55)';
-      context.shadowBlur = 9;
-      context.lineWidth = 1.25;
-      context.stroke();
+      const stroke = dark ? [65, 211, 190] : [108, 92, 231];
+      context.shadowColor = dark ? 'rgba(65, 211, 190, .72)' : 'rgba(108, 92, 231, .58)';
+      context.shadowBlur = 7;
+      for (let index = 0; index < trail.current.length - 1; index += 1) {
+        const point = trail.current[index];
+        const next = trail.current[index + 1];
+        const strength = 1 - index / trail.current.length;
+        context.beginPath();
+        context.moveTo(point.x, point.y);
+        context.lineTo(next.x, next.y);
+        context.strokeStyle = `rgba(${stroke.join(', ')}, ${strength * 0.62})`;
+        context.lineWidth = 0.55 + strength * 1.2;
+        context.stroke();
+      }
       cursor.style.transform = `translate3d(${current.current.x}px, ${current.current.y}px, 0)`;
       frame.current = requestAnimationFrame(render);
     };
