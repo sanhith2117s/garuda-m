@@ -10,7 +10,7 @@ import StudentDashboard from './pages/StudentDashboard';
 import GlobalModal from './components/GlobalModal';
 import ToastOverlay from './components/ToastOverlay';
 import LiquidPointer from './components/LiquidPointer';
-import CursorGrid from './components/CursorGrid';
+import ContextCursor from './components/ContextCursor';
 import { useAuthStore } from './store';
 import { toast } from './utils/toast';
 
@@ -82,7 +82,7 @@ function App() {
       </BrowserRouter>
       <GlobalModal />
       <ToastOverlay />
-      <CursorGrid />
+      <ContextCursor />
       <LiquidPointer />
     </>
   );
