@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+.coverage
+htmlcov/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Databases & SQLite files
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Static User Uploads (keep directory structure)
+backend/static/photos/*
+!backend/static/photos/.gitkeep
+
+# Environment variables & secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Node / Web Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist/
+.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Flutter / Mobile Scanner
+security_scanner/.dart_tool/
+security_scanner/build/
+security_scanner/.flutter-plugins
+security_scanner/.flutter-plugins-dependencies
+security_scanner/.packages
+security_scanner/.pub-cache/
+security_scanner/.pub/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/

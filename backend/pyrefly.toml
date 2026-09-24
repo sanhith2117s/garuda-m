@@ -1,0 +1,40 @@
+# pyrefly.toml
+# Pyrefly configuration for the FastAPI backend
+
+project-includes = [
+    "**/*.py"
+]
+
+project-excludes = [
+    "**/.venv/**",
+    "**/venv/**",
+    "**/env/**",
+    "**/__pycache__/**",
+    "**/.pytest_cache/**",
+    "**/.mypy_cache/**",
+    "**/.ruff_cache/**",
+    "**/node_modules/**",
+    "**/test-results/**",
+    "**/htmlcov/**",
+    "**/reports/**"
+]
+
+use-ignore-files = true
+
+search-path = [
+    "."
+]
+
+python-platform = "win32"
+python-version = "3.10"
+
+# Use the project's virtual environment automatically if available.
+skip-interpreter-query = false
+
+# Use default preset
+preset = "default"
+
+# Show warnings and errors during CLI checks.
+min-severity = "warn"
+
+[errors]

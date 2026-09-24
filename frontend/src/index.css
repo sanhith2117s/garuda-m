@@ -1,0 +1,856 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .glassmorphism {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Smooth transition for theme switching */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 250ms;
+}
+
+/* Dark mode overrides for custom utilities */
+.dark .glassmorphism {
+  background-color: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* 🏫 KMIT Institutional Portal Light Mode Design System */
+html:not(.dark),
+html:not(.dark) body,
+html:not(.dark) #root {
+  background-color: #F7F9FA !important;
+  color: #34465A;
+}
+
+html:not(.dark) .min-h-screen,
+html:not(.dark) .h-screen,
+html:not(.dark) main {
+  background-color: #F7F9FA !important;
+}
+
+/* Header */
+html:not(.dark) header {
+  background-color: #FFFFFF !important;
+  border-bottom: 1px solid #E8ECEE !important;
+  box-shadow: none !important;
+}
+
+/* Sidebar */
+html:not(.dark) aside {
+  background-color: #FFFFFF !important;
+  border-right: 1px solid #E8ECEE !important;
+}
+
+/* Inactive Sidebar Nav Items & Terracotta Orange Icons */
+html:not(.dark) aside nav button:not(.bg-emerald-600) {
+  color: #52657A !important;
+}
+html:not(.dark) aside nav button:not(.bg-emerald-600) svg {
+  color: #E8752D !important;
+}
+.dark aside nav button:not(.bg-emerald-600) svg {
+  color: #FB923C !important;
+}
+
+/* Active Navigation Item & White Icon Enforcement */
+html:not(.dark) aside nav button.bg-emerald-600,
+html:not(.dark) aside nav button.bg-indigo-600,
+html:not(.dark) .bg-emerald-600,
+html:not(.dark) .bg-indigo-600,
+.dark aside nav button.bg-emerald-600,
+.dark aside nav button.bg-indigo-600 {
+  background-color: #159A78 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(21, 154, 120, 0.16) !important;
+}
+
+html:not(.dark) aside nav button.bg-emerald-600 svg,
+.dark aside nav button.bg-emerald-600 svg,
+aside nav button.bg-emerald-600 svg {
+  color: #FFFFFF !important;
+}
+
+/* Primary Teal Buttons & Active Items */
+html:not(.dark) button.bg-emerald-600:hover,
+html:not(.dark) button.bg-indigo-600:hover,
+html:not(.dark) .bg-emerald-600:hover,
+html:not(.dark) .bg-indigo-600:hover {
+  background-color: #108968 !important;
+}
+
+/* Secondary Action Buttons (White) */
+html:not(.dark) button.bg-white,
+html:not(.dark) .btn-secondary {
+  background-color: #FFFFFF !important;
+  border: 1px solid #DDE4E8 !important;
+  color: #34465A !important;
+}
+
+/* Dynamic Mapping for ALL Remaining Light Mode Indigo/Purple/Blue Elements -> KMIT Teal (#159A78) */
+html:not(.dark) [class*="text-indigo-"],
+html:not(.dark) [class*="text-purple-"],
+html:not(.dark) [class*="text-[#7e3af2]"],
+html:not(.dark) [class*="text-[#6366f1]"],
+html:not(.dark) [class*="hover:text-indigo-"]:hover,
+html:not(.dark) [class*="hover:text-purple-"]:hover {
+  color: #159A78 !important;
+}
+
+html:not(.dark) [class*="bg-indigo-600"],
+html:not(.dark) [class*="bg-indigo-700"],
+html:not(.dark) [class*="bg-indigo-500"],
+html:not(.dark) [class*="bg-[#7e3af2]"],
+html:not(.dark) [class*="bg-[#6366f1]"],
+html:not(.dark) [class*="bg-[#6c2bd9]"],
+html:not(.dark) [class*="bg-purple-600"] {
+  background-color: #159A78 !important;
+  color: #FFFFFF !important;
+  border-color: #159A78 !important;
+  box-shadow: 0 4px 12px rgba(21, 154, 120, 0.16) !important;
+}
+
+/* Clean Solid Card Design System */
+html:not(.dark) .bg-white,
+html:not(.dark) div[class*="bg-white"] {
+  background-color: #FFFFFF !important;
+}
+
+.dark .bg-slate-900,
+.dark div[class*="bg-slate-900"],
+.dark div[class*="bg-[#162032]"] {
+  background-color: #0F172A !important;
+}
+
+/* Dark Mode High-Contrast Icon Badge Enforcement */
+.dark [class*="bg-emerald-"] svg,
+.dark [class*="bg-amber-"] svg,
+.dark [class*="bg-indigo-"] svg,
+.dark [class*="bg-purple-"] svg,
+.dark [class*="bg-rose-"] svg,
+.dark [class*="bg-sky-"] svg,
+.dark [class*="bg-teal-"] svg {
+  color: #FFFFFF !important;
+}
+
+.dark [class*="text-indigo-600"],
+.dark [class*="text-indigo-500"],
+.dark [class*="text-indigo-400"],
+.dark [class*="text-purple-600"],
+.dark [class*="text-purple-500"],
+.dark [class*="text-purple-400"] {
+  color: #34D399 !important;
+}
+
+.dark [class*="bg-indigo-600"],
+.dark [class*="bg-indigo-700"],
+.dark [class*="bg-purple-600"] {
+  background-color: #10B981 !important;
+  color: #FFFFFF !important;
+}
+
+html:not(.dark) [class*="hover:bg-[#7e3af2]"]:hover,
+html:not(.dark) [class*="hover:bg-[#6c2bd9]"]:hover,
+html:not(.dark) [class*="hover:bg-indigo-700"]:hover,
+html:not(.dark) [class*="hover:bg-indigo-600"]:hover {
+  background-color: #108968 !important;
+  color: #FFFFFF !important;
+}
+
+html:not(.dark) [class*="bg-indigo-50"],
+html:not(.dark) [class*="bg-indigo-100"],
+html:not(.dark) [class*="bg-purple-50"],
+html:not(.dark) [class*="bg-[#f3edfd]"] {
+  background-color: #EAF7F3 !important;
+}
+
+html:not(.dark) [class*="border-indigo-"],
+html:not(.dark) [class*="border-purple-"],
+html:not(.dark) [class*="border-[#7e3af2]"] {
+  border-color: #B8E6C5 !important;
+}
+
+html:not(.dark) [class*="ring-indigo-"],
+html:not(.dark) [class*="focus:ring-indigo-"]:focus,
+html:not(.dark) [class*="focus:border-[#7e3af2]"]:focus {
+  border-color: #159A78 !important;
+  --tw-ring-color: rgba(21, 154, 120, 0.15) !important;
+}
+
+html:not(.dark) [class*="shadow-indigo-"] {
+  box-shadow: 0 4px 12px rgba(21, 154, 120, 0.12) !important;
+}
+
+/* Orange Action Buttons & Badges */
+html:not(.dark) .bg-orange-600,
+html:not(.dark) .bg-amber-600,
+html:not(.dark) button.bg-orange-600,
+html:not(.dark) button.bg-amber-600 {
+  background-color: #E8752D !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 12px rgba(232, 117, 45, 0.16) !important;
+}
+html:not(.dark) .bg-orange-600:hover,
+html:not(.dark) .bg-amber-600:hover,
+html:not(.dark) button.bg-orange-600:hover,
+html:not(.dark) button.bg-amber-600:hover {
+  background-color: #D96622 !important;
+}
+
+/* Card Surfaces */
+html:not(.dark) .bg-white {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8EA !important;
+  box-shadow: 0 6px 18px rgba(30, 50, 60, 0.06) !important;
+}
+
+/* Input Fields, Dropdowns, Textareas */
+html:not(.dark) input,
+html:not(.dark) select,
+html:not(.dark) textarea {
+  background-color: #F8FAFB !important;
+  border: 1px solid #DDE4E8 !important;
+  color: #263445 !important;
+}
+
+html:not(.dark) input::placeholder,
+html:not(.dark) select::placeholder,
+html:not(.dark) textarea::placeholder {
+  color: #91A0AF !important;
+}
+
+html:not(.dark) input:focus,
+html:not(.dark) select:focus,
+html:not(.dark) textarea:focus {
+  border-color: #159A78 !important;
+  box-shadow: 0 0 0 3px rgba(21, 154, 120, 0.10) !important;
+}
+
+/* Fix icon contrast in light badge containers */
+html:not(.dark) .bg-emerald-50 svg,
+html:not(.dark) .bg-emerald-50\/80 svg,
+html:not(.dark) .bg-emerald-50\/50 svg,
+html:not(.dark) .bg-indigo-50 svg,
+html:not(.dark) .bg-indigo-50\/80 svg,
+html:not(.dark) .bg-indigo-50\/50 svg,
+html:not(.dark) [class*="bg-emerald-50"] svg,
+html:not(.dark) [class*="bg-indigo-50"] svg {
+  color: #159A78 !important;
+}
+
+/* Fix icon contrast in dark badge containers */
+.dark .bg-emerald-50 svg,
+.dark .bg-emerald-950 svg,
+.dark [class*="bg-emerald-"] svg,
+.dark [class*="bg-indigo-"] svg {
+  color: #34D399 !important;
+}
+
+/* Ensure button icons always inherit crisp button text color */
+button svg,
+button.bg-emerald-600 svg,
+button.bg-indigo-600 svg,
+button.bg-orange-600 svg,
+button.bg-rose-600 svg,
+.bg-emerald-600 svg,
+.bg-indigo-600 svg {
+  color: inherit !important;
+  stroke: currentColor !important;
+}
+
+/* Page Titles */
+html:not(.dark) h1,
+html:not(.dark) h2,
+html:not(.dark) .text-slate-900,
+html:not(.dark) .text-gray-900 {
+  color: #172033 !important;
+}
+
+/* Section Headings & Uppercase Labels */
+html:not(.dark) label.uppercase,
+html:not(.dark) .text-slate-500.uppercase,
+html:not(.dark) .text-slate-400.uppercase,
+html:not(.dark) .text-gray-500.uppercase {
+  color: #405A70 !important;
+}
+
+/* Body Text & Subtitles */
+html:not(.dark) p:not([class*="text-"]),
+html:not(.dark) span.text-slate-500,
+html:not(.dark) span.text-gray-500 {
+  color: #607286 !important;
+}
+
+/* Tables */
+html:not(.dark) table {
+  background-color: #FFFFFF !important;
+}
+
+html:not(.dark) thead,
+html:not(.dark) thead tr,
+html:not(.dark) th {
+  background-color: #F1F5F6 !important;
+  color: #394B5E !important;
+  border-bottom: 1px solid #E1E7E9 !important;
+}
+
+html:not(.dark) tbody tr {
+  border-bottom: 1px solid #E1E7E9 !important;
+}
+
+html:not(.dark) tbody tr:hover {
+  background-color: #F7FAF9 !important;
+}
+
+/* Status Badges */
+html:not(.dark) .bg-emerald-100,
+html:not(.dark) .bg-emerald-50,
+html:not(.dark) .bg-green-100 {
+  background-color: #E2F6E9 !important;
+  color: #3E7F4F !important;
+  border-color: #B8E6C5 !important;
+}
+
+html:not(.dark) .bg-amber-100,
+html:not(.dark) .bg-amber-50,
+html:not(.dark) .bg-yellow-100 {
+  background-color: #FFF4D9 !important;
+  color: #9A711F !important;
+  border-color: #F0D58C !important;
+}
+
+html:not(.dark) .bg-red-100,
+html:not(.dark) .bg-rose-100,
+html:not(.dark) .bg-rose-50 {
+  background-color: #FDEBEC !important;
+  color: #B84A50 !important;
+  border-color: #F2C4C7 !important;
+}
+
+/* 🌙 Premium Dark Mode Global Styling Overrides */
+html.dark,
+.dark body,
+.dark #root,
+.dark main,
+.dark .min-h-screen,
+.dark .h-screen {
+  background-color: #0B0F19 !important;
+  color: #f8fafc !important;
+  color-scheme: dark !important;
+}
+
+/* Glassmorphic Navbar Headers, Mobile Navigation Bars, and Overlays */
+.dark header.bg-white\/80,
+.dark header[class*="slate-900/"],
+.dark nav.bg-white\/80,
+.dark nav.bg-white\/90,
+.dark [class*="bg-white/80"],
+.dark [class*="bg-white/90"] {
+  background-color: #0B0F19 !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  background-image: none !important;
+}
+
+/* Sidebars with Indigo Deep Dark Gradient */
+.dark aside {
+  background: linear-gradient(180deg, #0F1322 0%, #070913 100%) !important;
+  border-right: 1px solid rgba(99, 102, 241, 0.12) !important;
+}
+
+/* Dynamic Glassmorphic Card Surfaces */
+.dark .bg-white {
+  background-color: #111827 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Darken translucent light borders and background panels to prevent muddy gray colors */
+.dark .bg-slate-50\/30,
+.dark .bg-gray-50\/30,
+.dark .bg-slate-50\/20,
+.dark .bg-gray-50\/20,
+.dark .bg-slate-50\/10,
+.dark .bg-gray-50\/10,
+.dark [class*="bg-slate-50/"],
+.dark [class*="bg-gray-50/"] {
+  background-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Dynamic Dark Card Highlight Background Overrides for Solid Slate/Gray 50/100 panels */
+.dark .bg-slate-50:not(.min-h-screen):not(.h-screen),
+.dark .bg-gray-50:not(.min-h-screen):not(.h-screen) {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .bg-slate-100:not(.min-h-screen):not(.h-screen),
+.dark .bg-gray-100:not(.min-h-screen):not(.h-screen) {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Translucent Borders in Dark Mode */
+.dark .border-slate-50,
+.dark .border-gray-50,
+.dark .border-slate-100,
+.dark .border-gray-100,
+.dark .border-slate-200,
+.dark .border-gray-200 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Specific dividers in tables and list-items */
+.dark .divide-slate-50 > * + *,
+.dark .divide-gray-50 > * + * {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Form Input fields, Select dropdowns, and Textareas in Light Mode */
+input,
+select,
+textarea {
+  color-scheme: light !important;
+}
+
+/* Form Input fields, Select dropdowns, and Textareas */
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: #0b0f19 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(99, 102, 241, 0.2) !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  border-radius: 12px !important;
+  color-scheme: dark !important;
+}
+
+.dark input:focus,
+.dark select:focus,
+.dark textarea:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark select option {
+  background-color: #0b0f19 !important;
+  color: #ffffff !important;
+}
+
+/* Clean Crisp Logo Styling in Dark Mode */
+.dark img[src*="logo"] {
+  filter: brightness(0) invert(1) !important;
+}
+
+
+/* Table layouts & hover rows */
+.dark table {
+  background-color: transparent !important;
+}
+
+.dark tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+}
+
+.dark tr:hover {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+.dark thead,
+.dark thead tr,
+.dark th {
+  background-color: #0d121f !important;
+  color: #94a3b8 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Overriding Tailwind CSS gradient variables dynamically */
+.dark [class*="from-white"] {
+  --tw-gradient-from: #111726 !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(17, 23, 38, 0)) !important;
+}
+.dark [class*="to-slate-50"] {
+  --tw-gradient-to: #080b12 !important;
+}
+
+/* Neutralize white-theme light shadows */
+.dark .shadow-indigo-100\/50,
+.dark .shadow-indigo-100\/30,
+.dark .shadow-indigo-900\/20,
+.dark .shadow-blue-900\/20,
+.dark .shadow-amber-100\/50 {
+  box-shadow: none !important;
+}
+
+/* Active Nav Button Glowing Backlight */
+.dark .bg-indigo-600,
+.dark .bg-\[\#7e3af2\] {
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Inactive Login Tabs */
+.dark .bg-white.text-gray-700 {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #94a3b8 !important;
+}
+.dark .bg-white.text-gray-700:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
+}
+
+/* Alert Box Borders */
+.dark .border-amber-200 {
+  border-color: rgba(245, 158, 11, 0.25) !important;
+  background-color: rgba(245, 158, 11, 0.04) !important;
+}
+
+/* Premium custom theme toggle switch buttons */
+.dark button[aria-label="Toggle dark mode"] {
+  background-color: #0b0f19 !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.2) !important;
+}
+
+.dark button[aria-label="Toggle dark mode"] span {
+  background-color: #6366f1 !important;
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.6) !important;
+}
+
+/* Text visibility configuration */
+.dark .text-slate-950,
+.dark .text-gray-950,
+.dark .text-slate-900,
+.dark .text-gray-900,
+.dark .text-slate-800,
+.dark .text-gray-800 {
+  color: #ffffff !important;
+}
+
+.dark .text-slate-700,
+.dark .text-gray-700,
+.dark .text-slate-650,
+.dark .text-gray-650,
+.dark .text-slate-600,
+.dark .text-gray-600 {
+  color: #e2e8f0 !important;
+}
+
+.dark .text-slate-400,
+.dark .text-gray-400,
+.dark .text-slate-300,
+.dark .text-gray-300 {
+  color: #94a3b8 !important;
+}
+
+.dark .text-slate-500,
+.dark .text-gray-500 {
+  color: #64748b !important;
+}
+
+/* Soft colored alert overlays & badge components in dark mode */
+.dark .bg-indigo-50\/80,
+.dark .bg-indigo-50\/60,
+.dark .bg-indigo-50\/50,
+.dark .bg-indigo-50 {
+  background-color: rgba(99, 102, 241, 0.15) !important;
+}
+.dark .border-indigo-100,
+.dark .border-indigo-100\/80,
+.dark .border-indigo-100\/50,
+.dark .border-indigo-200 {
+  border-color: rgba(99, 102, 241, 0.25) !important;
+}
+.dark .text-indigo-650,
+.dark .text-indigo-700,
+.dark .text-indigo-600 {
+  color: #a5b4fc !important;
+}
+
+.dark .bg-emerald-50\/80,
+.dark .bg-emerald-50\/60,
+.dark .bg-emerald-50\/50,
+.dark .bg-emerald-50,
+.dark .bg-green-50 {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+}
+.dark .border-emerald-100,
+.dark .border-emerald-100\/80,
+.dark .border-emerald-100\/50,
+.dark .border-emerald-200,
+.dark .border-emerald-300 {
+  border-color: rgba(16, 185, 129, 0.25) !important;
+}
+.dark .text-emerald-700,
+.dark .text-emerald-600,
+.dark .text-green-600 {
+  color: #34d399 !important;
+}
+
+/* Purple color overrides for HOD and admin portal widgets */
+.dark .bg-purple-50,
+.dark .bg-purple-50\/50,
+.dark .bg-purple-50\/80 {
+  background-color: rgba(139, 92, 246, 0.15) !important;
+}
+.dark .border-purple-100,
+.dark .border-purple-200 {
+  border-color: rgba(139, 92, 246, 0.25) !important;
+}
+.dark .text-purple-600,
+.dark .text-purple-700 {
+  color: #c084fc !important;
+}
+.dark .bg-purple-100,
+.dark .bg-purple-200 {
+  background-color: rgba(139, 92, 246, 0.25) !important;
+}
+.dark .bg-emerald-100,
+.dark .bg-emerald-200 {
+  background-color: rgba(16, 185, 129, 0.25) !important;
+}
+.dark .bg-indigo-100,
+.dark .bg-indigo-200 {
+  background-color: rgba(99, 102, 241, 0.25) !important;
+}
+.dark .bg-blue-100,
+.dark .bg-blue-200 {
+  background-color: rgba(59, 130, 246, 0.25) !important;
+}
+.dark .bg-rose-100,
+.dark .bg-rose-200 {
+  background-color: rgba(239, 68, 68, 0.25) !important;
+}
+.dark .bg-amber-100,
+.dark .bg-amber-200 {
+  background-color: rgba(245, 158, 11, 0.25) !important;
+}
+
+/* Settings page side card and custom borders */
+.dark .bg-gradient-to-b.from-\[\#f8faff\] {
+  background: linear-gradient(180deg, #111726 0%, #0b0f19 100%) !important;
+}
+.dark .border-indigo-50\/50 {
+  border-color: rgba(99, 102, 241, 0.1) !important;
+}
+
+.dark .bg-amber-50\/80,
+.dark .bg-amber-50\/60,
+.dark .bg-amber-50\/50,
+.dark .bg-amber-50,
+.dark .bg-orange-50,
+.dark .bg-yellow-50 {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+}
+.dark .border-amber-100,
+.dark .border-amber-100\/80,
+.dark .border-amber-100\/50,
+.dark .border-amber-200 {
+  border-color: rgba(245, 158, 11, 0.25) !important;
+}
+.dark .text-amber-700,
+.dark .text-amber-600,
+.dark .text-orange-600,
+.dark .text-yellow-600 {
+  color: #fbbf24 !important;
+}
+
+.dark .bg-blue-50\/80,
+.dark .bg-blue-50\/60,
+.dark .bg-blue-50\/50,
+.dark .bg-blue-50 {
+  background-color: rgba(59, 130, 246, 0.15) !important;
+}
+.dark .border-blue-100,
+.dark .border-blue-100\/80,
+.dark .border-blue-100\/50,
+.dark .border-blue-200 {
+  border-color: rgba(59, 130, 246, 0.25) !important;
+}
+.dark .text-blue-700,
+.dark .text-blue-600 {
+  color: #60a5fa !important;
+}
+
+.dark .bg-rose-50\/80,
+.dark .bg-rose-50\/60,
+.dark .bg-rose-50\/50,
+.dark .bg-rose-50,
+.dark .bg-red-50,
+.dark .bg-red-50\/60,
+.dark .bg-red-50\/50 {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+}
+.dark .border-rose-100,
+.dark .border-rose-100\/80,
+.dark .border-rose-100\/50,
+.dark .border-rose-200 {
+  border-color: rgba(239, 68, 68, 0.25) !important;
+}
+.dark .text-rose-700,
+.dark .text-rose-600,
+.dark .text-red-700,
+.dark .text-red-600 {
+  color: #f87171 !important;
+}
+
+.dark .bg-slate-50\/80,
+.dark .bg-slate-50\/60,
+.dark .bg-slate-50\/50,
+.dark .bg-slate-50,
+.dark .bg-gray-50\/60,
+.dark .bg-gray-50\/50,
+.dark .bg-gray-50 {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+.dark .border-slate-200,
+.dark .border-slate-200\/80,
+.dark .border-slate-200\/50,
+.dark .border-gray-200 {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+.dark .text-slate-600,
+.dark .text-slate-500,
+.dark .text-gray-500 {
+  color: #cbd5e1 !important;
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* 🛠️ Polyfills for Non-Existent custom color classes used in Dashboards      */
+/* ────────────────────────────────────────────────────────────────────────── */
+.bg-slate-850,
+.dark .bg-slate-850 {
+  background-color: #1e293b !important;
+}
+.bg-slate-750,
+.dark .bg-slate-750 {
+  background-color: #334155 !important;
+}
+.border-slate-750,
+.dark .border-slate-750 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.border-indigo-850,
+.dark .border-indigo-850 {
+  border-color: rgba(99, 102, 241, 0.25) !important;
+}
+.text-slate-850,
+.dark .text-slate-850 {
+  color: #e2e8f0 !important;
+}
+.text-slate-555,
+.dark .text-slate-555 {
+  color: #94a3b8 !important;
+}
+.text-indigo-750,
+.dark .text-indigo-750 {
+  color: #a5b4fc !important;
+}
+
+/* Hover fixes for HOD & Staff Portal sidebar items and buttons */
+.dark .dark\:hover\:bg-slate-850:hover,
+.dark .dark\:hover\:bg-slate-750:hover,
+.dark .hover\:bg-indigo-50:hover {
+  background-color: rgba(99, 102, 241, 0.12) !important;
+  color: #a78bfa !important;
+}
+
+.dark .dark\:hover\:text-rose-450:hover,
+.dark .dark\:hover\:text-rose-455:hover {
+  color: #f87171 !important;
+}
+
+.dark .dark\:hover\:text-indigo-450:hover {
+  color: #818cf8 !important;
+}
+
+/* Custom Select Dropdown Options hover overrides in dark mode to prevent white background contrast issues */
+.dark .hover\:bg-slate-50:hover {
+  background-color: #1f2937 !important;
+  color: #ffffff !important;
+}
+
+/* Custom Scrollbar Styles for modern premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Custom premium link and label colors to prevent Tailwind-override specificity conflicts */
+.nav-link-inactive {
+  color: #64748b !important;
+}
+.dark .nav-link-inactive {
+  color: #e2e8f0 !important;
+}
+
+.nav-label-inactive {
+  color: #64748b !important;
+}
+.dark .nav-label-inactive {
+  color: #cbd5e1 !important;
+}
+
+/* Prevent auto-zoom on mobile devices by ensuring font-size is at least 16px */
+@media (max-width: 1023px) {
+  input[type="text"],
+  input[type="password"],
+  input[type="number"],
+  input[type="search"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Garuda Soaring Flight Animation */
+@keyframes garuda-fly {
+  0% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+    filter: drop-shadow(0 10px 15px rgba(126, 58, 242, 0.25));
+  }
+  50% {
+    transform: translateY(-14px) rotate(-2deg) scale(1.04);
+    filter: drop-shadow(0 25px 30px rgba(126, 58, 242, 0.5));
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+    filter: drop-shadow(0 10px 15px rgba(126, 58, 242, 0.25));
+  }
+}
+
+.animate-garuda-fly {
+  animation: garuda-fly 3.5s ease-in-out infinite;
+}
+

@@ -1,0 +1,1340 @@
+You are the senior software engineer, QA engineer, security engineer, DevOps engineer, and test automation engineer responsible for performing a COMPLETE production-readiness audit of this project.
+
+Your goal is NOT simply to inspect the code or create tests.
+
+Your goal is to:
+
+INSPECT → UNDERSTAND → TEST → FIND PROBLEMS → DIAGNOSE → FIX SAFE PROBLEMS → RETEST → LOAD TEST → SECURITY TEST → VERIFY → CLEAN UP → GENERATE A COMPLETE REPORT.
+
+Work autonomously wherever it is safe to do so.
+
+============================================================
+0. MOST IMPORTANT RULES
+============================================================
+
+1. First understand the existing project before modifying anything.
+
+2. Do NOT redesign the UI.
+
+3. Do NOT rewrite the architecture unnecessarily.
+
+4. Do NOT make large refactors unless they are required to fix a verified problem.
+
+5. Preserve existing functionality and API contracts unless a change is required to fix a bug.
+
+6. Do not fabricate test results.
+
+7. Never say a test passed unless you actually executed it.
+
+8. Never say a security scan passed unless the relevant tool actually ran.
+
+9. Never say the application supports 50 concurrent users unless the 50-user load test actually ran successfully.
+
+10. Do not use production credentials.
+
+11. Do not use production databases or production user data.
+
+12. Use a dedicated test/development database and test environment.
+
+13. Do not expose, print, commit, or modify secrets.
+
+14. Do not delete important project files.
+
+15. Do not execute destructive commands such as:
+   - git reset --hard
+   - git clean -fd
+   - deleting the database
+   - deleting project directories
+   - formatting disks
+   - destructive system commands
+
+16. Before making major changes, inspect the current implementation and understand why the change is necessary.
+
+17. Prefer the smallest safe fix.
+
+18. After fixing something, rerun the relevant test.
+
+19. After multiple fixes, rerun the complete relevant test suite to detect regressions.
+
+20. Continue until the project has been thoroughly tested.
+
+21. If a tool cannot be executed, clearly report:
+   - why it could not be executed
+   - what was attempted
+   - what remains unverified
+
+22. NEVER invent metrics, coverage, latency, security results, or load-test results.
+
+============================================================
+1. PROJECT DISCOVERY
+============================================================
+
+Start by thoroughly inspecting the entire repository.
+
+Understand:
+
+- Project structure
+- Backend
+- Frontend
+- Database
+- Authentication
+- Authorization
+- API architecture
+- Business logic
+- Models
+- Schemas
+- Services
+- Utilities
+- Background jobs
+- External APIs/services
+- Configuration
+- Environment variables
+- Docker configuration
+- Existing tests
+- Existing test tools
+- Build configuration
+- Package/dependency configuration
+- CI/CD configuration if present
+
+Identify the technologies actually being used.
+
+Do not assume a framework merely from folder names.
+
+Determine:
+
+- Python version
+- Node.js version
+- Backend framework
+- Frontend framework
+- Database type
+- ORM/database library
+- Authentication mechanism
+- API style
+- Deployment architecture
+- Docker usage
+
+Inspect README/documentation if available.
+
+Inspect existing test files.
+
+Inspect configuration files.
+
+Inspect dependency files such as:
+
+- requirements.txt
+- pyproject.toml
+- package.json
+- package-lock.json
+- Dockerfile
+- docker-compose.yml / compose.yml
+- pytest configuration
+- Ruff configuration
+- Pyrefly configuration
+- ESLint configuration
+- Playwright configuration
+- Locust files
+- CI configuration
+
+============================================================
+2. CREATE A PROJECT INVENTORY
+============================================================
+
+Before testing, create an internal inventory of:
+
+A. All API endpoints
+
+For each endpoint determine:
+
+- Method
+- Path
+- Purpose
+- Authentication requirement
+- Required role
+- Request body
+- Query parameters
+- Path parameters
+- Response
+- Database operations
+- External service dependencies
+
+B. Major application features
+
+C. User roles
+
+D. Database tables/models
+
+E. Important business workflows
+
+F. External dependencies
+
+G. Background jobs
+
+H. Critical security boundaries
+
+Do not rely only on documentation.
+
+Compare documentation against actual implementation.
+
+============================================================
+3. GIT SAFETY
+============================================================
+
+Before making modifications:
+
+Inspect Git status.
+
+Understand the current working tree.
+
+Do not overwrite unrelated user changes.
+
+Do not reset or clean the repository.
+
+Keep fixes focused on this audit.
+
+At the end, clearly summarize files changed.
+
+============================================================
+4. TEST ENVIRONMENT
+============================================================
+
+Before running tests:
+
+Determine whether the project already has:
+
+- Test environment
+- Test database
+- Test configuration
+- Environment-specific configuration
+- Test fixtures
+- Mock services
+
+If a proper test environment does not exist, create a safe test setup where possible.
+
+NEVER use production data.
+
+NEVER expose secrets.
+
+If environment variables are required:
+
+- Inspect variable names
+- Do not print secret values
+- Use safe test values or mocks
+- Use .env.example where appropriate
+
+============================================================
+5. PYTEST — BACKEND FUNCTIONAL TESTING
+============================================================
+
+Use pytest for comprehensive backend testing.
+
+If pytest is missing and the project is Python-based, determine whether it can safely be installed/configured.
+
+Create or improve tests as required.
+
+Test:
+
+A. Unit functionality
+
+- Utility functions
+- Business logic
+- Services
+- Validation functions
+- Important helper functions
+
+B. API endpoints
+
+For EVERY important endpoint test:
+
+SUCCESS CASES
+
+- Valid request
+- Expected status code
+- Expected response
+- Expected response structure
+- Correct database state
+
+VALIDATION CASES
+
+- Missing required fields
+- Invalid data types
+- Empty values
+- Invalid formats
+- Invalid IDs
+- Boundary values
+- Oversized values where relevant
+
+AUTHENTICATION
+
+- No authentication
+- Invalid token/session
+- Expired authentication
+- Valid authentication
+
+AUTHORIZATION
+
+- Correct role
+- Incorrect role
+- Unauthorized resource access
+- Accessing another user's resource
+- Unauthorized modification
+- Unauthorized deletion
+
+ERROR CASES
+
+- Resource not found
+- Duplicate records
+- Invalid state
+- Invalid business operation
+- Database errors where safely testable
+- External-service failures where safely mockable
+
+Do not test only HTTP status codes.
+
+Verify the actual response and database state.
+
+============================================================
+6. BUSINESS WORKFLOW TESTING
+============================================================
+
+Test complete workflows rather than isolated endpoints.
+
+Discover the actual workflows from the application.
+
+For example, where applicable:
+
+LOGIN
+→ AUTHENTICATION
+→ DASHBOARD
+→ CREATE RECORD
+→ RETRIEVE RECORD
+→ UPDATE RECORD
+→ VERIFY DATABASE
+→ LOGOUT
+
+Also test workflows such as:
+
+- User registration
+- Login
+- Logout
+- Resource creation
+- Resource modification
+- Resource deletion/cancellation
+- Search
+- Filtering
+- Approval/rejection
+- Admin operations
+- User-specific operations
+
+Use the actual workflows present in this project.
+
+Verify:
+
+UI/API action
+→ backend logic
+→ database operation
+→ returned result
+
+============================================================
+7. DATABASE TESTING
+============================================================
+
+Inspect the database design and implementation.
+
+Test:
+
+- Schema correctness
+- Constraints
+- Primary keys
+- Foreign keys
+- Unique constraints
+- Required fields
+- Relationships
+- Transactions
+- Rollbacks
+- Connection handling
+- Connection pooling
+- Query correctness
+- Data consistency
+
+Check for:
+
+- Duplicate records
+- Orphan records
+- Lost updates
+- Incorrect state transitions
+- Partial writes
+- Transaction problems
+
+Verify important database state after tests.
+
+============================================================
+8. AUTHENTICATION AND AUTHORIZATION AUDIT
+============================================================
+
+Thoroughly test authentication.
+
+Check:
+
+- Login
+- Logout
+- Token/session creation
+- Token/session validation
+- Expiration
+- Invalid credentials
+- Missing credentials
+- Protected endpoints
+
+Test authorization.
+
+Verify:
+
+- Users can access only what they should
+- Admin functionality is protected
+- Users cannot access other users' private data
+- Users cannot perform admin actions
+- Resource ownership is enforced
+
+Look for IDOR/BOLA-style access-control problems.
+
+============================================================
+9. PLAYWRIGHT — REAL BROWSER TESTING
+============================================================
+
+If the project has a web frontend, use Playwright.
+
+If Playwright is not configured, determine whether it can safely be added.
+
+Use a real browser.
+
+Do NOT only check whether pages load.
+
+Test realistic user journeys.
+
+Examples where applicable:
+
+1. Open application
+2. Login
+3. Verify authentication
+4. Navigate dashboard
+5. Create something
+6. Verify success
+7. Search/filter
+8. Open details
+9. Update
+10. Verify update
+11. Delete/cancel if applicable
+12. Verify final state
+13. Logout
+
+Also test:
+
+- Invalid login
+- Form validation
+- Unauthorized access
+- API failure handling
+- Empty states
+- Error states
+- Loading states
+- Session expiration where testable
+
+Important:
+
+Verify:
+
+BROWSER ACTION
+→ FRONTEND
+→ API REQUEST
+→ BACKEND
+→ DATABASE
+→ API RESPONSE
+→ FRONTEND UI
+
+The purpose is to verify the complete system.
+
+If no frontend exists, report:
+
+"Playwright: Not Applicable — no browser frontend detected."
+
+============================================================
+10. CONCURRENCY TESTING
+============================================================
+
+Identify operations that may have race conditions.
+
+Test simultaneous operations such as:
+
+- Multiple creates
+- Multiple updates
+- Multiple deletes/cancellations
+- Simultaneous approval
+- Simultaneous rejection
+- Duplicate submissions
+- Multiple login/session operations
+
+Especially test operations where two users could modify the same resource simultaneously.
+
+Verify:
+
+- No duplicate records
+- No lost updates
+- No corrupted records
+- No invalid states
+- Correct final state
+- Correct transaction behavior
+
+============================================================
+11. LOCUST — LOAD AND CONCURRENCY TESTING
+============================================================
+
+Use Locust for realistic load testing.
+
+If Locust is not installed, determine whether it can safely be installed.
+
+Do NOT simply send thousands of requests to one endpoint.
+
+Create realistic simulated users based on the application's actual user roles and workflows.
+
+For example, if applicable:
+
+- Student users
+- Admin users
+- Other application roles
+
+Use realistic endpoint combinations.
+
+============================================================
+12. LOAD TEST LEVELS
+============================================================
+
+Run progressive load testing:
+
+LEVEL 1:
+10 concurrent users
+
+LEVEL 2:
+25 concurrent users
+
+LEVEL 3:
+50 concurrent users
+
+The primary target is:
+
+50 CONCURRENT USERS
+for approximately 15 minutes.
+
+Do not claim success before actually running the test.
+
+============================================================
+13. LOCUST METRICS
+============================================================
+
+Collect:
+
+- Total requests
+- Successful requests
+- Failed requests
+- Error percentage
+- Requests per second
+- Average response time
+- Median response time
+- p50 latency
+- p95 latency
+- p99 latency
+- Maximum latency
+- Slowest endpoints
+- Requests by endpoint
+- Errors by endpoint
+
+Where possible monitor:
+
+- CPU
+- RAM
+- Database connections
+- Database connection pool
+- Database resource usage
+- Container health
+- Application restarts
+- Timeouts
+
+Explain what the metrics mean.
+
+Do not create arbitrary pass/fail thresholds unless the project has defined requirements.
+
+If requirements exist, compare results against them.
+
+============================================================
+14. DATA INTEGRITY AFTER LOAD TEST
+============================================================
+
+After Locust finishes:
+
+Verify the database.
+
+Check for:
+
+- Missing records
+- Duplicate records
+- Corrupted records
+- Lost updates
+- Invalid states
+- Incomplete transactions
+- Unexpected errors
+
+Compare expected behavior with actual database state.
+
+Load testing is not complete until data correctness is checked.
+
+============================================================
+15. RUFF — PYTHON CODE QUALITY
+============================================================
+
+If Python exists, run Ruff.
+
+Check:
+
+- Lint errors
+- Unused imports
+- Unused variables
+- Dead/simplely unnecessary code
+- Code-quality issues
+- Formatting where configured
+
+Fix safe issues automatically where possible.
+
+Do not make unnecessary stylistic changes that create huge diffs.
+
+After fixes:
+
+Run Ruff again.
+
+============================================================
+16. PYREFLY — PYTHON TYPE CHECKING
+============================================================
+
+If Python exists, run Pyrefly.
+
+Check for:
+
+- Incorrect types
+- Incorrect function arguments
+- Incorrect return values
+- Missing attributes
+- Undefined names
+- Invalid assignments
+- Type inconsistencies
+- Import/type problems
+
+Fix clear issues.
+
+Run Pyrefly again after fixes.
+
+If the project's Pyrefly configuration is invalid or incompatible with the installed version:
+
+- Diagnose it
+- Fix the configuration if safe
+- Rerun Pyrefly
+
+Do not fabricate Pyrefly results.
+
+============================================================
+17. ESLINT / JAVASCRIPT / TYPESCRIPT
+============================================================
+
+If the project contains JavaScript or TypeScript:
+
+Inspect the existing ESLint configuration.
+
+Run the project's appropriate lint/type-check commands.
+
+Check:
+
+- ESLint
+- TypeScript compiler/type checking
+- Build process
+
+Fix safe issues.
+
+Rerun after fixes.
+
+Do not assume ESLint is enough to prove the frontend works.
+
+Use Playwright for actual browser behavior.
+
+============================================================
+18. SEMGREP — SECURITY ANALYSIS
+============================================================
+
+Run Semgrep where applicable.
+
+Check for:
+
+- Hardcoded secrets
+- Injection vulnerabilities
+- SQL injection
+- NoSQL injection
+- Command injection
+- Path traversal
+- Unsafe file handling
+- Authentication problems
+- Authorization problems
+- Dangerous functions
+- Insecure configurations
+- Sensitive information exposure
+- Applicable security patterns
+
+Investigate every meaningful finding.
+
+Do not blindly suppress warnings.
+
+Classify findings as:
+
+- Confirmed issue
+- False positive
+- Needs manual review
+
+Fix confirmed issues when safe.
+
+Rerun Semgrep after fixes.
+
+============================================================
+19. CODEQL — DEEPER SECURITY ANALYSIS
+============================================================
+
+If CodeQL is available/configured:
+
+Run appropriate CodeQL analysis.
+
+Check for code-flow security issues and vulnerabilities.
+
+If CodeQL cannot be executed:
+
+Clearly state:
+
+- CodeQL was not executed
+- Why
+- What alternative checks were performed
+- What remains unverified
+
+Never claim CodeQL passed if it did not run.
+
+============================================================
+20. DEPENDENCY SECURITY
+============================================================
+
+Inspect dependencies.
+
+Look for:
+
+- Outdated critical dependencies
+- Known security risks where available
+- Unnecessary dependencies
+- Suspicious packages
+
+Do not automatically upgrade major dependencies unless required.
+
+Avoid breaking the project just for version changes.
+
+Report dependency risks separately.
+
+============================================================
+21. DOCKER VALIDATION
+============================================================
+
+If Docker is used:
+
+Inspect:
+
+- Dockerfile
+- docker-compose.yml / compose.yml
+- Container configuration
+- Environment variables
+- Volumes
+- Networks
+- Health checks
+- Service dependencies
+
+Build the containers.
+
+Start the services.
+
+Verify:
+
+- Containers start
+- Backend starts
+- Frontend starts if applicable
+- Database starts
+- Services communicate
+- Health endpoints work
+- APIs respond
+- Required dependencies are available
+
+Check logs for errors.
+
+Fix safe Docker/configuration problems.
+
+Restart and verify again.
+
+============================================================
+22. FAILURE RECOVERY TESTING
+============================================================
+
+Where safely possible, test failure scenarios.
+
+Examples:
+
+- Invalid request
+- Invalid authentication
+- Missing database record
+- Database temporarily unavailable
+- External service unavailable
+- Timeout
+- Invalid external response
+- Duplicate request
+- Unauthorized request
+
+Verify that:
+
+- Application returns appropriate errors
+- Server does not crash
+- Sensitive information is not leaked
+- Database remains consistent
+- Services recover correctly where applicable
+
+Do not intentionally damage production systems.
+
+Use the test environment only.
+
+============================================================
+23. API CONTRACT VALIDATION
+============================================================
+
+Compare:
+
+- API documentation
+- Actual routes
+- Request schemas
+- Response schemas
+- Frontend API usage
+
+Identify mismatches.
+
+Check:
+
+- Status codes
+- Request fields
+- Response fields
+- Error formats
+- Authentication requirements
+
+Document breaking or inconsistent behavior.
+
+DO NOT redesign the API during this audit unless a verified bug requires it.
+
+============================================================
+24. PERFORMANCE ANALYSIS
+============================================================
+
+Identify slow operations.
+
+Look for:
+
+- Slow database queries
+- N+1 queries
+- Excessive API calls
+- Unnecessary repeated computation
+- Blocking operations
+- Large payloads
+- Poor connection handling
+- Memory-heavy operations
+
+Do not optimize blindly.
+
+Use actual evidence from tests and profiling where available.
+
+============================================================
+25. AUTOMATIC BUG FIXING
+============================================================
+
+When a problem is found:
+
+STEP 1:
+Understand the root cause.
+
+STEP 2:
+Determine whether the fix is safe.
+
+STEP 3:
+Apply the smallest appropriate fix.
+
+STEP 4:
+Run the test that exposed the problem.
+
+STEP 5:
+Run related tests.
+
+STEP 6:
+Run the broader test suite.
+
+STEP 7:
+Verify no regression was introduced.
+
+Do not just hide errors.
+
+Do not weaken tests to make them pass.
+
+Do not remove functionality merely to eliminate failures.
+
+============================================================
+26. FINAL VERIFICATION
+============================================================
+
+After all fixes:
+
+Run the relevant complete validation again.
+
+At minimum, where applicable:
+
+pytest
+Playwright
+Locust
+Ruff
+Pyrefly
+ESLint/TypeScript
+Semgrep
+CodeQL
+Docker
+
+Do not claim a tool was run if it was unavailable.
+
+============================================================
+27. FINAL PRODUCTION READINESS REPORT
+============================================================
+
+Create:
+
+reports/production-readiness-report.md
+
+The report must contain:
+
+# Production Readiness Report
+
+## 1. Executive Summary
+
+Describe:
+
+- What was tested
+- Environment used
+- Tools actually executed
+- Major findings
+- Major fixes
+- Remaining limitations
+
+Do not give an arbitrary overall score.
+
+Do not provide an unsupported "production ready" claim.
+
+Instead explain the evidence.
+
+------------------------------------------------------------
+
+## 2. Project Architecture
+
+Document:
+
+- Backend
+- Frontend
+- Database
+- Authentication
+- Authorization
+- External services
+- Docker
+- Deployment architecture
+
+------------------------------------------------------------
+
+## 3. API Inventory
+
+Use:
+
+| Method | Endpoint | Purpose | Auth | Role | Tested | Result | Notes |
+|---|---|---|---|---|---|---|---|
+
+Include important endpoints.
+
+------------------------------------------------------------
+
+## 4. Functional Testing
+
+Include:
+
+- Unit tests
+- API tests
+- Business workflow tests
+- Validation tests
+- Error tests
+
+Report:
+
+- Tests collected
+- Tests executed
+- Passed
+- Failed
+- Skipped
+- Coverage if actually available
+
+------------------------------------------------------------
+
+## 5. Authentication & Authorization
+
+Document:
+
+- Authentication tests
+- Authorization tests
+- Role tests
+- Unauthorized access tests
+- Ownership tests
+- Findings
+
+------------------------------------------------------------
+
+## 6. Database Testing
+
+Document:
+
+- Schema
+- Constraints
+- Transactions
+- Connection handling
+- Data integrity
+- Concurrency findings
+
+------------------------------------------------------------
+
+## 7. Playwright Results
+
+Use:
+
+| Workflow | Result | Details |
+|---|---|---|
+
+Include important browser workflows.
+
+If no frontend:
+
+"Not Applicable."
+
+------------------------------------------------------------
+
+## 8. Locust Load Testing
+
+Use:
+
+| Concurrent Users | Duration | Requests | RPS | Errors | Avg | p50 | p95 | p99 | Max |
+|---|---|---|---|---|---|---|---|---|---|
+
+Include:
+
+- 10-user test
+- 25-user test
+- 50-user test
+
+Clearly identify the actual 50-user result.
+
+------------------------------------------------------------
+
+## 9. Concurrency & Data Integrity
+
+Document:
+
+- Concurrent operations
+- Race-condition tests
+- Database verification
+- Duplicate records
+- Lost updates
+- Corruption
+- Transaction issues
+
+------------------------------------------------------------
+
+## 10. Ruff Results
+
+Include:
+
+- Findings before fixes
+- Findings fixed
+- Remaining findings
+- Final result
+
+------------------------------------------------------------
+
+## 11. Pyrefly Results
+
+Include:
+
+- Type errors before fixes
+- Fixes
+- Remaining issues
+- Final result
+
+------------------------------------------------------------
+
+## 12. ESLint / TypeScript Results
+
+If applicable, document:
+
+- Lint errors
+- Type errors
+- Build errors
+- Fixes
+- Remaining issues
+
+------------------------------------------------------------
+
+## 13. Semgrep Security Results
+
+Use:
+
+| Finding | Severity | Status | Action |
+|---|---|---|---|
+
+Distinguish:
+
+- Confirmed vulnerability
+- False positive
+- Manual review required
+
+------------------------------------------------------------
+
+## 14. CodeQL Results
+
+Document:
+
+- Whether CodeQL ran
+- Findings
+- Severity
+- Fixes
+- Remaining issues
+
+If unavailable, clearly say so.
+
+------------------------------------------------------------
+
+## 15. Dependency Security
+
+Document relevant dependency findings.
+
+------------------------------------------------------------
+
+## 16. Docker Results
+
+Document:
+
+- Build
+- Startup
+- Service connectivity
+- Health checks
+- Logs
+- API verification
+
+------------------------------------------------------------
+
+## 17. Failure Recovery
+
+Document failure scenarios tested and application behavior.
+
+------------------------------------------------------------
+
+## 18. Performance Findings
+
+Document actual evidence.
+
+Include slow endpoints and observed bottlenecks.
+
+------------------------------------------------------------
+
+## 19. Bugs Found
+
+Use:
+
+| Bug | Root Cause | Fix | Verification |
+|---|---|---|---|
+
+Only include real discovered bugs.
+
+------------------------------------------------------------
+
+## 20. Files Changed
+
+List every file modified or created during this audit.
+
+For each file briefly explain why it changed.
+
+------------------------------------------------------------
+
+## 21. Remaining Issues
+
+Clearly list:
+
+- Unresolved bugs
+- Security concerns
+- Performance concerns
+- Missing tests
+- Tool limitations
+- Environment limitations
+
+------------------------------------------------------------
+
+## 22. Production Verification Checklist
+
+Use:
+
+| Area | Status | Evidence |
+|---|---|---|
+| Backend functionality | PASS/FAIL/PARTIAL | |
+| API validation | PASS/FAIL/PARTIAL | |
+| Authentication | PASS/FAIL/PARTIAL | |
+| Authorization | PASS/FAIL/PARTIAL | |
+| Database integrity | PASS/FAIL/PARTIAL | |
+| Business workflows | PASS/FAIL/PARTIAL | |
+| Browser testing | PASS/FAIL/PARTIAL/N/A | |
+| Concurrency | PASS/FAIL/PARTIAL | |
+| 10-user load | PASS/FAIL/PARTIAL | |
+| 25-user load | PASS/FAIL/PARTIAL | |
+| 50-user load | PASS/FAIL/PARTIAL | |
+| Security | PASS/FAIL/PARTIAL | |
+| Ruff | PASS/FAIL/PARTIAL/N/A | |
+| Pyrefly | PASS/FAIL/PARTIAL/N/A | |
+| ESLint/TypeScript | PASS/FAIL/PARTIAL/N/A | |
+| Semgrep | PASS/FAIL/PARTIAL/N/A | |
+| CodeQL | PASS/FAIL/PARTIAL/N/A | |
+| Dependencies | PASS/FAIL/PARTIAL | |
+| Docker | PASS/FAIL/PARTIAL/N/A | |
+| Failure recovery | PASS/FAIL/PARTIAL | |
+
+Do NOT calculate an overall score.
+
+Do NOT assign "A/B/C" grades.
+
+Do NOT claim production readiness without evidence.
+
+============================================================
+28. FINAL RESPONSE TO ME
+============================================================
+
+After completing the audit, give me a concise summary containing:
+
+1. Project analyzed
+2. Tools actually executed
+3. Total tests run
+4. Tests passed
+5. Tests failed
+6. Tests skipped
+7. Playwright result
+8. Locust 10-user result
+9. Locust 25-user result
+10. Locust 50-user result
+11. 50-user error rate
+12. 50-user p95 latency
+13. 50-user p99 latency
+14. Security findings
+15. Ruff result
+16. Pyrefly result
+17. ESLint/TypeScript result if applicable
+18. CodeQL result
+19. Docker result
+20. Bugs found
+21. Bugs fixed
+22. Remaining issues
+23. Report location
+
+============================================================
+29. AUTONOMOUS EXECUTION FLOW
+============================================================
+
+Follow this order:
+
+PROJECT DISCOVERY
+        ↓
+ARCHITECTURE UNDERSTANDING
+        ↓
+API / FEATURE INVENTORY
+        ↓
+TEST ENVIRONMENT SETUP
+        ↓
+PYTEST
+        ↓
+DATABASE TESTING
+        ↓
+AUTHENTICATION / AUTHORIZATION
+        ↓
+PLAYWRIGHT
+        ↓
+CONCURRENCY TESTING
+        ↓
+LOCUST 10 USERS
+        ↓
+LOCUST 25 USERS
+        ↓
+LOCUST 50 USERS / 15 MINUTES
+        ↓
+DATABASE INTEGRITY VERIFICATION
+        ↓
+RUFF
+        ↓
+PYREFLY
+        ↓
+ESLINT / TYPESCRIPT
+        ↓
+SEMGREP
+        ↓
+CODEQL
+        ↓
+DEPENDENCY SECURITY
+        ↓
+DOCKER
+        ↓
+FAILURE RECOVERY
+        ↓
+PERFORMANCE ANALYSIS
+        ↓
+FIX VERIFIED ISSUES
+        ↓
+RE-RUN TESTS
+        ↓
+FINAL VERIFICATION
+        ↓
+GENERATE REPORT
+        ↓
+FINAL SUMMARY
+
+============================================================
+30. ABSOLUTE FINAL REQUIREMENT
+============================================================
+
+DO NOT STOP AFTER ANALYSIS.
+
+DO NOT STOP AFTER CREATING TESTS.
+
+DO NOT STOP AFTER INSTALLING TOOLS.
+
+DO NOT STOP AFTER THE FIRST FAILURE.
+
+DO NOT CLAIM SUCCESS WITHOUT EXECUTION.
+
+Actually execute the available tests and tools.
+
+Fix safe, verified problems.
+
+Rerun the affected tests.
+
+Then perform final verification.
+
+Generate:
+
+reports/production-readiness-report.md
+
+The report must contain actual evidence from the execution.
+
+If something could not be tested, explicitly state that it could not be tested and why.
+
+Never fabricate a result.
