@@ -801,6 +801,11 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .context-cursor[data-mode="sphere"]::after { border-style: dashed; }
 .dark .context-cursor-trail { filter: drop-shadow(0 0 6px rgba(65,211,190,.4)); }
 @media (hover: none), (prefers-reduced-motion: reduce) { .context-cursor-trail { display: none; } }
+/* Keep the pencil trail; replace the former morphing head with a quiet arrow tip. */
+.context-cursor { width: 12px; height: 12px; margin: 0; transition: opacity 180ms ease; }
+.context-cursor::before { inset: 0; border-radius: 1px; clip-path: polygon(0 0, 100% 50%, 0 100%, 24% 50%); background: #6c5ce7; box-shadow: 0 0 10px rgba(108,92,231,.7), 0 0 24px rgba(65,211,190,.34); transform: none !important; }
+.context-cursor::after, .context-cursor span { display: none; }
+.dark .context-cursor::before { background: #41d3be; box-shadow: 0 0 10px rgba(65,211,190,.8), 0 0 26px rgba(139,124,255,.42); }
 
 .context-cursor { position: fixed; left: -18px; top: -18px; width: 36px; height: 36px; z-index: 70; pointer-events: none; opacity: 0; transform: translate3d(-100px, -100px, 0); transition: opacity 220ms ease, width 260ms cubic-bezier(.22,1,.36,1), height 260ms cubic-bezier(.22,1,.36,1), margin 260ms cubic-bezier(.22,1,.36,1); will-change: transform, width, height; }
 .context-cursor[data-visible="true"] { opacity: 1; }
