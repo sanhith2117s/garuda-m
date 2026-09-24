@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import SecurityApp from './pages/security/SecurityApp';
 import HODDashboard from './pages/hod/HODDashboard';
 import MentorDashboard from './pages/mentor/MentorDashboard';
+import StudentDashboard from './pages/StudentDashboard';
 import GlobalModal from './components/GlobalModal';
 import ToastOverlay from './components/ToastOverlay';
 import { useAuthStore } from './store';
@@ -24,6 +25,7 @@ function ProtectedRoute({ children, allowedRoles }: { children: React.ReactNode;
     if (role === 'security') return <Navigate to="/security" replace />;
     if (role === 'hod') return <Navigate to="/hod" replace />;
     if (role === 'mentor') return <Navigate to="/mentor" replace />;
+    if (role === 'student') return <Navigate to="/student" replace />;
     return <Navigate to="/admin" replace />;
   }
 
@@ -56,6 +58,13 @@ function App() {
           <Route path="/mentor" element={
             <ProtectedRoute allowedRoles={['mentor']}>
               <MentorDashboard />
+            </ProtectedRoute>
+          } />
+
+          {/* Student Portal - Strictly Students Only */}
+          <Route path="/student/*" element={
+            <ProtectedRoute allowedRoles={['student']}>
+              <StudentDashboard />
             </ProtectedRoute>
           } />
 

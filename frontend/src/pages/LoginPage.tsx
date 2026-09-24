@@ -25,6 +25,7 @@ export default function LoginPage() {
     if (userRole === 'security') return '/security';
     if (userRole === 'hod') return '/hod';
     if (userRole === 'mentor') return '/mentor';
+    if (userRole === 'student') return '/student';
     return '/admin';
   };
 
