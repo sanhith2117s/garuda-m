@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Float, Html, MeshTransmissionMaterial, OrbitControls, Sparkles as DreiSparkles, Text } from '@react-three/drei';
+import { Environment, Float, Html, OrbitControls, Sparkles as DreiSparkles, Text } from '@react-three/drei';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store';
 import { ArrowDown, ArrowRight, Building2, Check, ChevronRight, Fingerprint, KeyRound, Layers3, Menu, Moon, Orbit, ScanLine, ShieldCheck, Sparkles, Sun, Users, X } from 'lucide-react';
@@ -29,27 +29,31 @@ const team = [
   { name: 'Sai Kishor', role: 'Campus operations', image: '/images/team/sai_kishor.jpg' },
 ];
 
-function OrbitalCore() {
+function CampusBuilding() {
   const group = useRef<THREE.Group>(null);
   useFrame((state, delta) => {
     if (!group.current) return;
-    group.current.rotation.y += delta * 0.16;
-    group.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.35) * 0.12;
+    group.current.rotation.y += delta * 0.12;
+    group.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.35) * 0.035;
   });
+
+  const windows = Array.from({ length: 18 }, (_, index) => {
+    const floor = Math.floor(index / 6);
+    const column = index % 6;
+    return <mesh key={index} position={[-0.88 + column * 0.35, -0.55 + floor * 0.55, 0.62]}><boxGeometry args={[0.18, 0.25, 0.035]} /><meshStandardMaterial color={column % 3 === 0 ? '#f28c28' : '#8bd1c0'} emissive={column % 3 === 0 ? '#f28c28' : '#8bd1c0'} emissiveIntensity={0.55} /></mesh>;
+  });
+
   return (
-    <group ref={group}>
-      <mesh rotation={[0.3, 0.4, 0.1]}>
-        <icosahedronGeometry args={[1.32, 5]} />
-        <MeshTransmissionMaterial backside thickness={0.62} roughness={0.12} transmission={0.98} ior={1.35} chromaticAberration={0.08} color="#f28c28" />
-      </mesh>
-      <mesh scale={1.55} rotation={[0.2, 0.5, 0]}>
-        <torusGeometry args={[1.42, 0.012, 16, 160]} />
-        <meshBasicMaterial color="#7cb8aa" transparent opacity={0.72} />
-      </mesh>
-      <mesh scale={1.78} rotation={[1.2, 0.15, 0.4]}>
-        <torusGeometry args={[1.42, 0.008, 16, 160]} />
-        <meshBasicMaterial color="#f28c28" transparent opacity={0.42} />
-      </mesh>
+    <group ref={group} position={[0, -0.2, 0]}>
+      <mesh position={[0, -1.05, 0]} rotation={[0, 0.15, 0]}><cylinderGeometry args={[1.55, 1.82, 0.14, 6]} /><meshStandardMaterial color="#17365d" metalness={0.65} roughness={0.28} /></mesh>
+      <mesh position={[0, 0, 0]} rotation={[0, 0.15, 0]}><boxGeometry args={[2.35, 2.25, 1.45]} /><meshStandardMaterial color="#bfc9c8" metalness={0.25} roughness={0.22} /></mesh>
+      <mesh position={[0, 1.35, 0]} rotation={[0, 0.15, 0]}><boxGeometry args={[1.42, 0.38, 1.2]} /><meshStandardMaterial color="#f28c28" metalness={0.32} roughness={0.24} /></mesh>
+      {windows}
+      <mesh position={[0, -0.66, 0.75]}><boxGeometry args={[0.38, 0.72, 0.05]} /><meshStandardMaterial color="#17365d" metalness={0.3} roughness={0.16} /></mesh>
+      <mesh position={[0, 1.85, 0]}><cylinderGeometry args={[0.035, 0.035, 0.72, 12]} /><meshStandardMaterial color="#f28c28" emissive="#f28c28" emissiveIntensity={1.2} /></mesh>
+      <mesh position={[0, 2.22, 0]}><sphereGeometry args={[0.12, 20, 20]} /><meshStandardMaterial color="#f28c28" emissive="#f28c28" emissiveIntensity={1.8} /></mesh>
+      <mesh scale={1.55} rotation={[0.2, 0.5, 0]}><torusGeometry args={[1.42, 0.012, 16, 160]} /><meshBasicMaterial color="#72b5a4" transparent opacity={0.72} /></mesh>
+      <mesh scale={1.78} rotation={[1.2, 0.15, 0.4]}><torusGeometry args={[1.42, 0.008, 16, 160]} /><meshBasicMaterial color="#f28c28" transparent opacity={0.42} /></mesh>
     </group>
   );
 }
@@ -62,7 +66,7 @@ function HeroScene() {
       <pointLight position={[-4, -2, 2]} intensity={10} color="#6aa99b" />
       <Suspense fallback={null}>
         <Float speed={1.4} rotationIntensity={0.2} floatIntensity={0.48}>
-          <OrbitalCore />
+          <CampusBuilding />
         </Float>
         <DreiSparkles count={85} scale={7} size={1.8} speed={0.28} color="#f28c28" />
         <Environment preset="studio" />
