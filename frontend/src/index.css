@@ -795,9 +795,10 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 
 /* Liquid pointer motion */
 .liquid-pointer-layer { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; mix-blend-mode: multiply; }
-.liquid-pointer-drop { position: fixed; left: 0; top: 0; width: calc(22px - (var(--trail-index) * 1.3px)); height: calc(22px - (var(--trail-index) * 1.3px)); border-radius: 999px; opacity: calc(.26 - (var(--trail-index) * .018)); background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.88), rgba(242,140,40,.48) 34%, rgba(23,54,93,.22) 72%, transparent 75%); filter: blur(calc(1px + (var(--trail-index) * .7px))); will-change: transform; }
+.liquid-pointer-layer::before { content: ''; position: fixed; left: -40px; top: -40px; width: 80px; height: 80px; border-radius: 999px; background: radial-gradient(circle, rgba(242,140,40,.32), rgba(114,181,164,.14) 42%, transparent 72%); filter: blur(12px); transform: translate3d(var(--pointer-x, -100px), var(--pointer-y, -100px), 0); transition: transform 80ms linear; }
+.liquid-pointer-drop { position: fixed; left: 0; top: 0; width: calc(34px - (var(--trail-index) * 1.65px)); height: calc(34px - (var(--trail-index) * 1.65px)); border-radius: 999px; opacity: calc(.38 - (var(--trail-index) * .021)); background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.98), rgba(242,140,40,.64) 30%, rgba(23,54,93,.3) 66%, transparent 76%); filter: blur(calc(1px + (var(--trail-index) * .55px))); box-shadow: 0 0 24px rgba(242,140,40,.18); will-change: transform; }
 .dark .liquid-pointer-layer { mix-blend-mode: screen; }
-.dark .liquid-pointer-drop { background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.9), rgba(242,140,40,.72) 32%, rgba(114,181,164,.34) 70%, transparent 75%); }
+.dark .liquid-pointer-drop { background: radial-gradient(circle at 35% 30%, rgba(255,255,255,1), rgba(242,140,40,.86) 30%, rgba(114,181,164,.5) 66%, transparent 76%); box-shadow: 0 0 32px rgba(242,140,40,.34), 0 0 70px rgba(114,181,164,.16); }
 @media (hover: none), (prefers-reduced-motion: reduce) { .liquid-pointer-layer { display: none; } }
 
 /* Sitewide Garuda / KMIT visual language */
