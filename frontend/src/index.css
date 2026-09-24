@@ -794,8 +794,8 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; filter: none; transition: none; } *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; } }
 
 /* Context-aware custom cursor */
-.context-cursor-trail { position: fixed; inset: 0; z-index: 69; pointer-events: none; opacity: 0; transition: opacity 220ms ease; }
-:has(.context-cursor[data-visible="true"]) .context-cursor-trail { opacity: 1; }
+.context-cursor-trail { position: fixed; inset: 0; z-index: 69; pointer-events: none; opacity: 1; transition: opacity 220ms ease; }
+.context-cursor { display: none !important; }
 .context-cursor::before { clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
 .context-cursor::after { border-radius: 50%; }
 .context-cursor[data-mode="sphere"]::after { border-style: dashed; }

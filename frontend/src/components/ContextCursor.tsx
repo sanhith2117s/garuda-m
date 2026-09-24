@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 
 export default function ContextCursor() {
-  const cursorRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const target = useRef({ x: -100, y: -100 });
   const current = useRef({ x: -100, y: -100 });
@@ -9,9 +8,8 @@ export default function ContextCursor() {
   const frame = useRef<number | null>(null);
 
   useEffect(() => {
-    const cursor = cursorRef.current;
     const canvas = canvasRef.current;
-    if (!cursor || !canvas) return;
+    if (!canvas) return;
     const context = canvas.getContext('2d');
     if (!context) return;
 
@@ -49,7 +47,6 @@ export default function ContextCursor() {
         context.lineWidth = 0.55 + strength * 1.2;
         context.stroke();
       }
-      cursor.style.transform = `translate3d(${current.current.x}px, ${current.current.y}px, 0)`;
       frame.current = requestAnimationFrame(render);
     };
 
@@ -73,5 +70,5 @@ export default function ContextCursor() {
     };
   }, []);
 
-  return <><canvas ref={canvasRef} className="context-cursor-trail" aria-hidden="true" /><div ref={cursorRef} className="context-cursor" data-mode="sphere" data-visible="false" aria-hidden="true"><span /></div></>;
+  return <canvas ref={canvasRef} className="context-cursor-trail" aria-hidden="true" />;
 }
