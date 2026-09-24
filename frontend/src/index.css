@@ -793,6 +793,13 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .reveal-visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; filter: none; transition: none; } *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; } }
 
+/* Liquid pointer motion */
+.liquid-pointer-layer { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; mix-blend-mode: multiply; }
+.liquid-pointer-drop { position: fixed; left: 0; top: 0; width: calc(22px - (var(--trail-index) * 1.3px)); height: calc(22px - (var(--trail-index) * 1.3px)); border-radius: 999px; opacity: calc(.26 - (var(--trail-index) * .018)); background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.88), rgba(242,140,40,.48) 34%, rgba(23,54,93,.22) 72%, transparent 75%); filter: blur(calc(1px + (var(--trail-index) * .7px))); will-change: transform; }
+.dark .liquid-pointer-layer { mix-blend-mode: screen; }
+.dark .liquid-pointer-drop { background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.9), rgba(242,140,40,.72) 32%, rgba(114,181,164,.34) 70%, transparent 75%); }
+@media (hover: none), (prefers-reduced-motion: reduce) { .liquid-pointer-layer { display: none; } }
+
 /* Sitewide Garuda / KMIT visual language */
 body { background: #f5f2eb; color: #17365d; }
 body, button, input, select, textarea { letter-spacing: -0.01em; }
