@@ -64,7 +64,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0B0F19] flex flex-col items-center justify-center py-8 px-4 font-sans relative transition-colors duration-300 overflow-hidden">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0c1117] flex flex-col items-center justify-center py-10 px-4 font-sans relative transition-colors duration-300 overflow-hidden">
 
       {/* Background Institutional Graphic Watermarks */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none select-none opacity-5 dark:opacity-10 flex items-center justify-between px-10">
@@ -79,19 +79,19 @@ export default function LoginPage() {
 
       {/* Brand Header */}
       <div className="flex flex-col items-center mb-8 relative z-10 text-center">
-        <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white dark:bg-slate-900 rounded-3xl p-3.5 border border-slate-200/80 dark:border-slate-800 shadow-lg flex items-center justify-center mb-4 transition-transform hover:scale-105 duration-300">
+        <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white dark:bg-[#121922] rounded-[1.75rem] p-3.5 border border-slate-200/80 dark:border-white/10 shadow-lg flex items-center justify-center mb-4 transition-transform hover:scale-105 duration-300">
           <img src={logo} alt="GARUDA" className="h-full w-full object-contain" />
         </div>
         <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
           GARUDA
         </h1>
-        <p className="text-xs sm:text-sm font-bold text-[#E8752D] dark:text-[#FB923C] uppercase tracking-widest mt-1">
-          Student Gate Pass System • KMEC | NGIT
+        <p className="text-[11px] sm:text-xs font-bold text-[#E8752D] dark:text-[#e2a85c] uppercase tracking-[0.24em] mt-2">
+          Campus movement, made accountable
         </p>
       </div>
 
       {/* Main Login Surface Card */}
-      <div className="w-full max-w-md bg-white dark:bg-[#162032] rounded-3xl shadow-xl dark:shadow-2xl border border-slate-200/80 dark:border-slate-700/60 p-6 sm:p-8 transition-all duration-300 relative z-10">
+      <div className="w-full max-w-md bg-white dark:bg-[#121922] rounded-[2rem] shadow-xl dark:shadow-2xl border border-slate-200/80 dark:border-white/10 p-6 sm:p-8 transition-all duration-300 relative z-10">
 
         <div className="mb-6 pb-4 border-b border-slate-100 dark:border-slate-800">
           <h2 className="text-slate-900 dark:text-white font-extrabold text-xl tracking-tight">System Login</h2>

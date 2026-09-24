@@ -22,6 +22,7 @@ interface ActivePass {
 export default function OverviewPage() {
   const token = useAuthStore(s => s.token);
   const collegeId = useAuthStore(s => s.collegeId);
+  const fullName = useAuthStore(s => s.fullName);
   const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
   const [analytics, setAnalytics] = useState<any>(null);
@@ -122,12 +123,15 @@ export default function OverviewPage() {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
         <div>
-          <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-            <LayoutDashboard className="text-emerald-500" /> Action Required Dashboard
-          </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-semibold">
-            Central operational queue for Mentor fallback approvals, emergency pass monitoring, and active gate returns
-          </p>
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400 mb-2">Operations overview</p>
+            <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+              Good morning, {fullName?.split(' ')[0] || 'there'}
+            </h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 font-medium">
+              A clear view of today&apos;s approvals, active movement, and exceptions.
+            </p>
+          </div>
         </div>
 
         <button
