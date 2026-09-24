@@ -9,7 +9,6 @@ import MentorDashboard from './pages/mentor/MentorDashboard';
 import StudentDashboard from './pages/StudentDashboard';
 import GlobalModal from './components/GlobalModal';
 import ToastOverlay from './components/ToastOverlay';
-import LiquidPointer from './components/LiquidPointer';
 import ContextCursor from './components/ContextCursor';
 import { useAuthStore } from './store';
 import { toast } from './utils/toast';
@@ -83,8 +82,7 @@ function App() {
       <GlobalModal />
       <ToastOverlay />
       <ContextCursor />
-      <LiquidPointer />
-    </>
+        </>
   );
 }
 
