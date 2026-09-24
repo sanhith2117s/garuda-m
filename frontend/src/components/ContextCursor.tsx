@@ -52,19 +52,12 @@ export default function ContextCursor() {
 
     const move = (event: PointerEvent) => {
       target.current = { x: event.clientX, y: event.clientY };
-      const targetElement = event.target instanceof Element ? event.target.closest('a, button, input, textarea, select, [data-cursor]') : null;
-      const mode = targetElement?.getAttribute('data-cursor') || (targetElement?.matches('input, textarea, select') ? 'pin' : targetElement ? 'ring' : 'sphere');
-      cursor.dataset.mode = mode;
-      cursor.dataset.visible = 'true';
     };
-    const leave = () => { cursor.dataset.visible = 'false'; };
 
     window.addEventListener('pointermove', move, { passive: true });
-    document.documentElement.addEventListener('pointerleave', leave);
     frame.current = requestAnimationFrame(render);
     return () => {
       window.removeEventListener('pointermove', move);
-      document.documentElement.removeEventListener('pointerleave', leave);
       window.removeEventListener('resize', resize);
       if (frame.current) cancelAnimationFrame(frame.current);
     };
