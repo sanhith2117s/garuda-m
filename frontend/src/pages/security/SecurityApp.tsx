@@ -191,7 +191,7 @@ export default function SecurityApp() {
   const displayName = result?.student_name || result?.name || 'Unknown student';
 
   return (
-    <div className="min-h-screen bg-[#0c1117] text-[#f4f1e9] font-sans selection:bg-[#e2a85c]/30">
+    <div className="portal-shell min-h-screen bg-[#0c1117] text-[#f4f1e9] font-sans selection:bg-[#e2a85c]/30">
       <header className="sticky top-0 z-30 border-b border-white/10 bg-[#121922]/95 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <div className="flex min-w-0 items-center gap-3">

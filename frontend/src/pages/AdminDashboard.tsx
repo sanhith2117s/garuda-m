@@ -223,7 +223,7 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0B0F19] flex flex-col font-sans text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <div className="portal-shell min-h-screen bg-[#f8fafc] dark:bg-[#0B0F19] flex flex-col font-sans text-slate-900 dark:text-slate-100 transition-colors duration-300">
       {/* Top Header Bar */}
       <header className="bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800 sticky top-0 z-40 shadow-xs">
         <div className="w-full px-4 sm:px-6 h-16 flex items-center justify-between">

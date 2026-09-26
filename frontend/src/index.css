@@ -793,6 +793,22 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .reveal-visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; filter: none; transition: none; } *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; } }
 
+/* Mobile portal layout */
+@media (max-width: 639px) {
+  .portal-shell { overflow-x: hidden; }
+  .portal-shell > header > div { min-width: 0; padding-inline: .75rem; gap: .5rem; }
+  .portal-shell > header .text-xl { font-size: 1rem; line-height: 1.1; }
+  .portal-shell > header .gap-3 { gap: .5rem; }
+  .portal-shell > header .gap-2\.5 { gap: .4rem; }
+  .portal-shell > header .tracking-widest { display: none; }
+  .portal-shell > header [class*="animate-pulse"] { max-width: 9rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: .625rem; }
+  .portal-shell main { min-width: 0; max-width: 100%; }
+  .portal-shell main h1 { font-size: 1.75rem; line-height: 1.1; }
+  .portal-shell .overflow-x-auto { max-width: calc(100vw - 1.5rem); }
+  .portal-shell table { min-width: 38rem; }
+  .portal-shell .fixed.inset-0 { padding: .75rem; }
+}
+
 /* Context-aware custom cursor */
 .context-cursor-trail { position: fixed; inset: 0; z-index: 69; pointer-events: none; opacity: 1; transition: opacity 220ms ease; }
 .context-cursor { display: none !important; }
