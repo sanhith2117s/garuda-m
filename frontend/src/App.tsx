@@ -30,7 +30,7 @@ function ProtectedRoute({ children, allowedRoles }: { children: React.ReactNode;
     return <Navigate to="/admin" replace />;
   }
 
-  return <>{children}</>;
+  return <div className="portal-shell">{children}</div>;
 }
 
 function App() {

@@ -795,6 +795,17 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 
 /* Mobile portal layout */
 @media (max-width: 639px) {
+  .portal-shell { display: block; width: 100%; min-width: 0; overflow-x: hidden; }
+  .portal-shell header { width: 100%; max-width: 100vw; }
+  .portal-shell header > div { min-width: 0; }
+  .portal-shell header img { max-width: 6.5rem; }
+  .portal-shell header button, .portal-shell header a { flex-shrink: 0; }
+  .portal-shell main { box-sizing: border-box; }
+  .portal-shell [class*="w-1/2"], .portal-shell [class*="w-1/3"], .portal-shell [class*="w-2/3"] { max-width: 100%; }
+  .portal-shell .truncate { max-width: 12rem; }
+  .portal-shell { overflow-wrap: anywhere; }
+  .portal-shell > * { min-width: 0; }
+  .portal-shell > .min-h-screen { min-height: 100dvh; }
   .portal-shell { overflow-x: hidden; }
   .portal-shell > header > div { min-width: 0; padding-inline: .75rem; gap: .5rem; }
   .portal-shell > header .text-xl { font-size: 1rem; line-height: 1.1; }
